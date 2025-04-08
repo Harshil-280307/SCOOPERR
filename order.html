@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Ice Cream - Scooper</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fffaf4;
+      color: #333;
+    }
+
+    header {
+      background-color: #ff6f91;
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    nav a.active {
+      text-decoration: underline;
+    }
+
+    .order-section {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: white;
+      padding: 35px 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .order-section h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #ff6f91;
+    }
+
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    form input,
+    form select,
+    form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      box-sizing: border-box;
+      transition: border 0.3s ease;
+    }
+
+    form input:focus,
+    form select:focus,
+    form textarea:focus {
+      border-color: #ff6f91;
+      outline: none;
+    }
+
+    form button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      background-color: #ff6f91;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #e05578;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #f2f2f2;
+      padding: 20px;
+      margin-top: 50px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Scooper - Place Your Order</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="flavors.html">Flavors</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="order.html" class="active">Order</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="order-section">
+      <h2>Order Your Favorite Ice Cream</h2>
+      <form id="orderForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+
+        <label for="phone">Mobile Number:</label>
+        <input type="tel" id="phone" required />
+
+        <label for="flavor">Select Flavor:</label>
+        <select id="flavor" required>
+          <option value="Vanilla">Vanilla</option>
+          <option value="Chocolate">Chocolate</option>
+          <option value="Strawberry">Strawberry</option>
+          <option value="Mango">Mango</option>
+          <option value="Butterscotch">Butterscotch</option>
+        </select>
+
+        <label for="quantity">Quantity:</label>
+        <select id="quantity" required>
+          <option value="1kg">1kg</option>
+          <option value="2kg">2kg</option>
+          <option value="5kg">5kg</option>
+        </select>
+
+        <label for="address">Address:</label>
+        <textarea id="address" required></textarea>
+
+        <button type="submit">Place Order</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Scooper. All rights reserved.</p>
+  </footer>
+
+  <!-- ✅ EmailJS Integration Script -->
+  <script type="module">
+    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/+esm';
+
+    emailjs.init("7vNZqQwPJ5RJ0O_vK");
+
+    document.getElementById("orderForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const templateParams = {
+        to_name: document.getElementById("name").value,
+        to_email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        flavor: document.getElementById("flavor").value,
+        quantity: document.getElementById("quantity").value,
+        address: document.getElementById("address").value,
+      };
+
+      emailjs.send("service_r7oogdn", "template_fl4a9z3", templateParams)
+        .then(() => {
+          alert("✅ Order placed successfully! Check your email.");
+          document.getElementById("orderForm").reset();
+        })
+        .catch((error) => {
+          alert("❌ Failed to send order. Check console for details.");
+          console.error("EmailJS Error:", error);
+        });
+    });
+  </script>
+</body>
+</html>
