@@ -194,11 +194,11 @@
 
       emailjs.send("service_r7oogdn", "template_fl4a9z3", templateParams)
         .then(() => {
-          alert("✅ Order placed successfully! Check your email.");
+          alert("✅ Order placed successfully! .");
           document.getElementById("orderForm").reset();
         })
         .catch((error) => {
-          alert("❌ Failed to send order. Check console for details.");
+          alert("❌ Failed to send order. ");
           console.error("EmailJS Error:", error);
         });
     });
