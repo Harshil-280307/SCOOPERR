@@ -169,7 +169,11 @@
         <label for="address">Address:</label>
         <textarea id="address" required></textarea>
 
-        <button type="submit">Place Order</button>
+        <button type="submit" id="submitBtn">
+  <span class="btn-text">Place Order</span>
+  <span class="spinner" style="display: none;"></span>
+</button>
+
       </form>
     </section>
   </main>
@@ -185,27 +189,53 @@
     emailjs.init("7vNZqQwPJ5RJ0O_vK");
 
     document.getElementById("orderForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+  e.preventDefault();
 
-      const templateParams = {
-        to_name: document.getElementById("name").value,
-        to_email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value,
-        flavor: document.getElementById("flavor").value,
-        quantity: document.getElementById("quantityValue").value + document.getElementById("quantityUnit").value,
-        address: document.getElementById("address").value,
-      };
+  const submitBtn = document.getElementById("submitBtn");
+  const btnText = submitBtn.querySelector(".btn-text");
+  const spinner = submitBtn.querySelector(".spinner");
 
-      emailjs.send("service_r7oogdn", "template_fl4a9z3", templateParams)
-        .then(() => {
-          alert("✅ Order placed successfully! .");
-          document.getElementById("orderForm").reset();
-        })
-        .catch((error) => {
-          alert("❌ Failed to send order. ");
-          console.error("EmailJS Error:", error);
-        });
+  // Get quantity values
+  const quantityVal = parseFloat(document.getElementById("quantityValue").value);
+  const quantityUnit = document.getElementById("quantityUnit").value;
+
+  // ✅ Minimum quantity validation
+  const quantityInGrams = quantityUnit === "kg" ? quantityVal * 1000 : quantityVal;
+  if (quantityInGrams < 500) {
+    alert("❗ Minimum quantity should be at least 500gm.");
+    return;
+  }
+
+  // Show loading animation
+  btnText.textContent = "Placing Order...";
+  spinner.style.display = "inline-block";
+  submitBtn.disabled = true;
+
+  const templateParams = {
+    to_name: document.getElementById("name").value,
+    to_email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    flavor: document.getElementById("flavor").value,
+    quantity: document.getElementById("quantityValue").value + document.getElementById("quantityUnit").value,
+    address: document.getElementById("address").value,
+  };
+
+  emailjs.send("service_r7oogdn", "template_fl4a9z3", templateParams)
+    .then(() => {
+      alert("✅ Order placed successfully!");
+      document.getElementById("orderForm").reset();
+    })
+    .catch((error) => {
+      alert("❌ Failed to send order.");
+      console.error("EmailJS Error:", error);
+    })
+    .finally(() => {
+      btnText.textContent = "Place Order";
+      spinner.style.display = "none";
+      submitBtn.disabled = false;
     });
+});
+
   </script>
 </body>
 </html>
