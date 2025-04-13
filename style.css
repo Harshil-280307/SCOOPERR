@@ -15,7 +15,7 @@ body {
     justify-content: center;
   }
   .blur{
-    padding: 3px;
+    padding: 5px;
     width: fit-content;
     border-radius: 2rem;
     background-color: rgba(0, 0, 0, 0.5);
