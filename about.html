@@ -15,14 +15,22 @@
     </div>
   </header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="flavors.html">Flavors</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="order.html">Order</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <header>
+    <!-- <h1>Scooper - Place Your Order</h1> -->
+    <div class="navbar">
+      <div class="logo">🍦 Scooper</div>
+      <button class="menu-toggle" id="menuToggle">&#9776;</button>
+      <nav id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="flavors.html">Flavors</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="order.html" class="activ">Order</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  
 
   <main>
     <section data-aos="fade-right">
@@ -55,5 +63,6 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
+  <script src="menu.js"></script>
 </body>
 </html>

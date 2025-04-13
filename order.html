@@ -124,13 +124,18 @@
 <body>
   <header>
     <h1>Scooper - Place Your Order</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="flavors.html">Flavors</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="order.html" class="active">Order</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div class="navbar">
+      <div class="logo">🍦 Scooper</div>
+      <button class="menu-toggle" id="menuToggle">&#9776;</button>
+      <nav id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="flavors.html">Flavors</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="order.html" class="active">Order</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -275,5 +280,6 @@ document.getElementById("quantityUnit").addEventListener("change", updatePrice);
 });
 
   </script>
+<script src="menu.js"></script>
 </body>
 </html>
