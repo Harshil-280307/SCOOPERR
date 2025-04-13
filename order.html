@@ -169,10 +169,15 @@
         <label for="address">Address:</label>
         <textarea id="address" required></textarea>
 
+        <div id="priceInfo" style="margin-top: 20px; font-weight: bold; font-size: 16px; color: #444;">
+          Total Price: ₹0
+        </div>
+        
+
         <button type="submit" id="submitBtn">
-  <span class="btn-text">Place Order</span>
-  <span class="spinner" style="display: none;"></span>
-</button>
+          <span class="btn-text">Place Order</span>
+          <span class="spinner" style="display: none;"></span>
+        </button>
 
       </form>
     </section>
@@ -187,6 +192,38 @@
     import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/+esm';
 
     emailjs.init("7vNZqQwPJ5RJ0O_vK");
+
+    // 🧾 Price per gram for each flavor
+const pricePerGram = {
+  Vanilla: 0.3,
+  Chocolate: 0.3,
+  Strawberry: 0.3,
+  Mango: 0.3,
+  Butterscotch: 0.3,
+};
+
+// ⚡ Update total price
+function updatePrice() {
+  const flavor = document.getElementById("flavor").value;
+  const quantityVal = parseFloat(document.getElementById("quantityValue").value);
+  const unit = document.getElementById("quantityUnit").value;
+
+  if (isNaN(quantityVal) || quantityVal <= 0) {
+    document.getElementById("priceInfo").textContent = "Total Price: ₹0";
+    return;
+  }
+
+  const quantityInGrams = unit === "kg" ? quantityVal * 1000 : quantityVal;
+  const price = quantityInGrams * pricePerGram[flavor];
+
+  document.getElementById("priceInfo").textContent = `Total Price: ₹${price.toFixed(2)}`;
+}
+
+// 👂 Listen for changes
+document.getElementById("flavor").addEventListener("change", updatePrice);
+document.getElementById("quantityValue").addEventListener("input", updatePrice);
+document.getElementById("quantityUnit").addEventListener("change", updatePrice);
+
 
     document.getElementById("orderForm").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -218,6 +255,7 @@
     flavor: document.getElementById("flavor").value,
     quantity: document.getElementById("quantityValue").value + document.getElementById("quantityUnit").value,
     address: document.getElementById("address").value,
+    total_price: (quantityInGrams * pricePerGram[templateParams.flavor]).toFixed(2),
   };
 
   emailjs.send("service_r7oogdn", "template_fl4a9z3", templateParams)

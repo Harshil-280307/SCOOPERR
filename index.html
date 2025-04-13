@@ -22,13 +22,15 @@
     }
 
     nav a {
+      
       text-decoration: none;
       color: #d6336c;
       font-weight: bold;
     }
 
     .hero {
-      background-color: #ffeff5;
+      background-color: black;
+      /* background-color: #ffeff5; */
       padding: 3rem 1rem;
       text-align: center;
     }
@@ -187,9 +189,11 @@
   </style>
 </head>
 <body>
-  <header class="hero">
-    <h1 data-aos="fade-down">Scooper 🍨</h1>
-    <p data-aos="fade-up">Scoop Happiness, One Flavor at a Time.</p>
+  <header class="hero" id="blur">
+    <div class="blur">
+      <h1 data-aos="fade-down">Scooper 🍨</h1>
+      <p data-aos="fade-up">Scoop Of Happiness, One Flavor at a Time.</p>
+    </div>
   </header>
 
   <nav>
@@ -202,12 +206,14 @@
   </nav>
 
   <main>
+    <center>
     <section data-aos="zoom-in">
       <h2>Welcome to Scooper!</h2>
       <p>We offer fresh, handmade ice cream in a variety of mouth-watering flavors. Our passion is delivering joy in every scoop.</p>
       <img src="https://images.pexels.com/photos/3631/summer-dessert-sweet-ice-cream.jpg?auto=compress&cs=tinysrgb&w=600" alt="Scooper Ice Cream" class="main-img" />
       <a href="order.html"><button>Order Now</button></a>
     </section>
+  </center>
 
     <section data-aos="fade-up" class="highlight">
       <h3>Why Choose Scooper?</h3>
