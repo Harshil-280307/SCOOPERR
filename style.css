@@ -308,7 +308,10 @@ body {
     cursor: not-allowed;
   }
   
-
+.note{
+  text-align: center;
+  color: red;
+}
   
   /* for contact  */
 
