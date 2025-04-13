@@ -218,4 +218,8 @@ body {
   .contact-form button:hover {
     background-color: #ff5ca2;
   }
+
+  .number {
+    text-align: center;
+  }
   
